@@ -1,38 +1,116 @@
 import { Truck, Shield, Headphones } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
+import { useRef, useState, useCallback } from 'react';
+import type { CarouselApi } from '@/components/ui/carousel';
+
+import heroSlide1 from '@/assets/hero-slide-1.jpg';
+import heroSlide2 from '@/assets/hero-slide-2.jpg';
+import heroSlide3 from '@/assets/hero-slide-3.jpg';
+
+const slides = [
+  {
+    image: heroSlide1,
+    title: 'تشكيلة جاكيتات SCOYCO',
+    subtitle: 'حماية وأسلوب وراحة لكل رحلة',
+    cta: 'تسوق الآن',
+    href: '#products',
+  },
+  {
+    image: heroSlide2,
+    title: 'خوذ احترافية',
+    subtitle: 'أفضل الخوذ العالمية بأسعار مميزة',
+    cta: 'اكتشف المجموعة',
+    href: '#products',
+  },
+  {
+    image: heroSlide3,
+    title: 'قطع غيار أصلية',
+    subtitle: 'جنازير وسبروكت وقطع غيار لجميع الموديلات',
+    cta: 'تصفح القطع',
+    href: '#products',
+  },
+];
 
 export function HeroSection() {
+  const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: false }));
+  const [current, setCurrent] = useState(0);
+  const [api, setApi] = useState<CarouselApi>();
+
+  const onSelect = useCallback(() => {
+    if (!api) return;
+    setCurrent(api.selectedScrollSnap());
+  }, [api]);
+
+  const handleApiSet = useCallback((newApi: CarouselApi) => {
+    setApi(newApi);
+    if (newApi) {
+      newApi.on('select', onSelect);
+      onSelect();
+    }
+  }, [onSelect]);
+
   return (
-    <section className="relative overflow-hidden bg-gradient-hero">
-      {/* Decorative elements */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-primary rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-primary rounded-full blur-[100px]" />
-      </div>
+    <section className="relative overflow-hidden">
+      <Carousel
+        opts={{ loop: true, direction: 'rtl' }}
+        plugins={[plugin.current]}
+        setApi={handleApiSet}
+        className="w-full"
+      >
+        <CarouselContent className="ml-0">
+          {slides.map((slide, index) => (
+            <CarouselItem key={index} className="pl-0 relative">
+              <div className="relative h-[400px] md:h-[520px] lg:h-[600px] overflow-hidden">
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  width={1920}
+                  height={800}
+                  {...(index === 0 ? {} : { loading: 'lazy' as const })}
+                />
+                <div className="absolute inset-0 bg-gradient-to-l from-black/70 via-black/40 to-transparent" />
+                <div className="absolute inset-0 flex items-center">
+                  <div className="container">
+                    <div className="max-w-lg mr-auto text-right space-y-4 md:space-y-6">
+                      <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-lg">
+                        {slide.title}
+                      </h2>
+                      <p className="text-lg md:text-xl text-white/80">{slide.subtitle}</p>
+                      <a
+                        href={slide.href}
+                        className="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-primary text-primary-foreground font-bold text-lg hover:opacity-90 transition-opacity shadow-glow"
+                      >
+                        {slide.cta}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
 
-      <div className="container relative py-16 md:py-24">
-        <div className="max-w-2xl mx-auto text-center space-y-6">
-          <div className="inline-block px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium">
-            شحن مجاني للطلبات فوق 300 ريال
-          </div>
-          <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
-            كل ما يحتاجه{' '}
-            <span className="text-gradient-accent">الدراج</span>
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-lg mx-auto">
-            اكتشف أفضل إكسسوارات الدراجات النارية، قطع الغيار، والملابس الواقية من أفضل العلامات التجارية العالمية
-          </p>
-          <div className="flex flex-wrap justify-center gap-3 pt-2">
-            <a href="#products" className="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-primary text-primary-foreground font-bold text-lg hover:opacity-90 transition-opacity shadow-glow">
-              تسوق الآن
-            </a>
-            <a href="#categories" className="inline-flex items-center gap-2 px-8 py-3 rounded-lg border border-border text-foreground font-medium hover:bg-secondary transition-colors">
-              تصفح الأقسام
-            </a>
-          </div>
+        {/* Dots indicator */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => api?.scrollTo(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === current
+                  ? 'bg-primary w-8'
+                  : 'bg-white/50 hover:bg-white/80'
+              }`}
+            />
+          ))}
         </div>
+      </Carousel>
 
-        {/* Features strip */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4">
+      {/* Features strip */}
+      <div className="container py-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
             { icon: Truck, title: 'شحن سريع', desc: 'توصيل لجميع مناطق المملكة' },
             { icon: Shield, title: 'منتجات أصلية', desc: 'ضمان الجودة من أفضل العلامات' },
