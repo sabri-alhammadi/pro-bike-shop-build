@@ -5,7 +5,7 @@ import { CartDrawer } from './CartDrawer';
 
 const navLinks = [
   { label: 'الهدايا', href: '/' },
-  { label: 'العروض', href: '/' },
+  { label: 'العروض', href: '/offers' },
   { label: 'العناية بالدراجة', href: '/' },
   { label: 'الحماية والإكسسوارات', href: '/' },
   { label: 'قطع الغيار', href: '/' },
