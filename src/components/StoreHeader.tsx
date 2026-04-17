@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Search, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { CartDrawer } from './CartDrawer';
+import { PromoBanner } from './PromoBanner';
 
 const navLinks = [
   { label: 'الهدايا', href: '/' },
@@ -15,8 +16,9 @@ export function StoreHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-      <div className="container flex h-16 items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+      <PromoBanner />
+      <div className="container flex h-16 items-center justify-between gap-4 border-b border-border">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 flex-shrink-0">
           <span className="font-heading text-2xl font-bold text-primary">ROAD BIKER</span>
