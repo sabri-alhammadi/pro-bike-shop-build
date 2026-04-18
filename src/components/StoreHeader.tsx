@@ -5,11 +5,13 @@ import { CartDrawer } from './CartDrawer';
 import { PromoBanner } from './PromoBanner';
 
 const navLinks = [
-  { label: 'الهدايا', href: '/' },
+  { label: 'الرئيسية', href: '/' },
   { label: 'العروض', href: '/offers' },
-  { label: 'العناية بالدراجة', href: '/' },
-  { label: 'الحماية والإكسسوارات', href: '/' },
-  { label: 'قطع الغيار', href: '/' },
+  { label: 'الخوذ', href: '/category/helmets' },
+  { label: 'الجاكيتات', href: '/category/jackets' },
+  { label: 'الإكسسوارات', href: '/category/accessories' },
+  { label: 'قطع الغيار', href: '/category/parts' },
+  { label: 'تواصل معنا', href: '/contact' },
 ];
 
 export function StoreHeader() {
@@ -22,7 +24,7 @@ export function StoreHeader() {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 flex-shrink-0">
           <span className="font-heading text-2xl font-bold text-primary">ROAD BIKER</span>
-          <span className="font-heading text-sm font-semibold text-muted-foreground">رود بايكر</span>
+          <span className="font-heading text-sm font-semibold text-muted-foreground hidden sm:inline">رود بايكر</span>
         </Link>
 
         {/* Desktop Nav */}
@@ -40,13 +42,14 @@ export function StoreHeader() {
 
         {/* Actions */}
         <div className="flex items-center gap-2">
-          <button className="p-2 rounded-md text-foreground/70 hover:text-primary hover:bg-secondary transition-colors">
+          <button className="p-2 rounded-md text-foreground/70 hover:text-primary hover:bg-secondary transition-colors hidden sm:inline-flex">
             <Search className="h-5 w-5" />
           </button>
           <CartDrawer />
           <button
             className="lg:hidden p-2 rounded-md text-foreground/70 hover:text-primary hover:bg-secondary transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="القائمة"
           >
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>

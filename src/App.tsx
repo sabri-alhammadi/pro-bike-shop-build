@@ -8,6 +8,9 @@ import { ChatBot } from "@/components/ChatBot";
 import Index from "./pages/Index.tsx";
 import ProductDetail from "./pages/ProductDetail.tsx";
 import Offers from "./pages/Offers.tsx";
+import Category from "./pages/Category.tsx";
+import Contact from "./pages/Contact.tsx";
+import About from "./pages/About.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -20,6 +23,9 @@ function AppContent() {
         <Route path="/" element={<Index />} />
         <Route path="/product/:handle" element={<ProductDetail />} />
         <Route path="/offers" element={<Offers />} />
+        <Route path="/category/:slug" element={<Category />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ChatBot />
