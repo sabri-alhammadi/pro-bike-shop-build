@@ -163,6 +163,35 @@ export default function ContactPage() {
         </form>
       </section>
 
+      {/* Google Maps */}
+      <section className="container pb-12">
+        <div className="space-y-4">
+          <h2 className="font-heading text-2xl font-bold">موقعنا على الخريطة</h2>
+          <p className="text-muted-foreground text-sm">الرياض، المملكة العربية السعودية</p>
+          <div className="rounded-2xl overflow-hidden border border-border shadow-glow aspect-[16/9] md:aspect-[21/9] bg-card">
+            <iframe
+              title="موقع ROAD BIKER على خرائط جوجل"
+              src="https://www.google.com/maps?q=Riyadh,Saudi+Arabia&output=embed"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
+          <a
+            href="https://maps.google.com/?q=Riyadh,Saudi+Arabia"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline"
+          >
+            <MapPin className="h-4 w-4" />
+            افتح في خرائط جوجل
+          </a>
+        </div>
+      </section>
+
       <StoreFooter />
     </div>
   );
