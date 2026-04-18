@@ -1,4 +1,5 @@
 import { MessageCircle } from 'lucide-react';
+import { VisitCounter } from './VisitCounter';
 
 export function StoreFooter() {
   return (
@@ -37,8 +38,9 @@ export function StoreFooter() {
             </p>
           </div>
         </div>
-        <div className="border-t border-border mt-8 pt-6 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Road Biker. جميع الحقوق محفوظة.
+        <div className="border-t border-border mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
+          <span>© {new Date().getFullYear()} Road Biker. جميع الحقوق محفوظة.</span>
+          <VisitCounter />
         </div>
       </div>
     </footer>
