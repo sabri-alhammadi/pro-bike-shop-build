@@ -23,6 +23,9 @@ function AppContent() {
         <Route path="/" element={<Index />} />
         <Route path="/product/:handle" element={<ProductDetail />} />
         <Route path="/offers" element={<Offers />} />
+        <Route path="/category/:slug" element={<Category />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ChatBot />
