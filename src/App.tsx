@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useCartSync } from "@/hooks/useCartSync";
+import { ChatBot } from "@/components/ChatBot";
 import Index from "./pages/Index.tsx";
 import ProductDetail from "./pages/ProductDetail.tsx";
 import Offers from "./pages/Offers.tsx";
@@ -21,6 +22,7 @@ function AppContent() {
         <Route path="/offers" element={<Offers />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <ChatBot />
     </BrowserRouter>
   );
 }
