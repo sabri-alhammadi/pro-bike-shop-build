@@ -17,9 +17,14 @@ export default function Auth() {
 
   useEffect(() => {
     document.title = 'تسجيل الدخول | ROAD BIKER';
+    // Listener FIRST, then check existing session
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) navigate('/admin');
+    });
     supabase.auth.getSession().then(({ data }) => {
       if (data.session) navigate('/admin');
     });
+    return () => sub.subscription.unsubscribe();
   }, [navigate]);
 
   const handleAuth = async (mode: 'signin' | 'signup') => {
@@ -30,13 +35,18 @@ export default function Auth() {
     setLoading(true);
     try {
       if (mode === 'signup') {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: { emailRedirectTo: `${window.location.origin}/admin` },
         });
         if (error) throw error;
-        toast.success('تم إنشاء الحساب! يمكنك تسجيل الدخول الآن.');
+        if (data.session) {
+          toast.success('تم إنشاء الحساب وتسجيل الدخول!');
+          navigate('/admin');
+        } else {
+          toast.success('تم إنشاء الحساب! تحقق من بريدك لتأكيد الحساب.');
+        }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
