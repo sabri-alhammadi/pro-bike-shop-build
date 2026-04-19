@@ -3,6 +3,7 @@ import { Search, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { CartDrawer } from './CartDrawer';
 import { PromoBanner } from './PromoBanner';
+import { ThemeToggle } from './ThemeToggle';
 
 const navLinks = [
   { label: 'الرئيسية', href: '/' },
@@ -45,6 +46,7 @@ export function StoreHeader() {
           <button className="p-2 rounded-md text-foreground/70 hover:text-primary hover:bg-secondary transition-colors hidden sm:inline-flex">
             <Search className="h-5 w-5" />
           </button>
+          <ThemeToggle />
           <CartDrawer />
           <button
             className="lg:hidden p-2 rounded-md text-foreground/70 hover:text-primary hover:bg-secondary transition-colors"
