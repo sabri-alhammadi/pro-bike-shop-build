@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { StoreHeader } from '@/components/StoreHeader';
 import { StoreFooter } from '@/components/StoreFooter';
-import { ArrowRight, MessageCircle, Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
+import { ArrowRight, MessageCircle, Phone, Mail, MapPin, Clock, Send, Bot, Sparkles, Zap, ShieldCheck } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function ContactPage() {
@@ -161,6 +161,78 @@ export default function ContactPage() {
             إرسال عبر واتساب
           </button>
         </form>
+      </section>
+
+      {/* AI Support */}
+      <section className="container pb-12">
+        <div className="rounded-2xl border border-primary/30 bg-gradient-to-bl from-primary/10 via-card to-card p-6 md:p-8 shadow-glow">
+          <div className="flex flex-col md:flex-row md:items-start gap-6">
+            <div className="w-14 h-14 rounded-2xl bg-primary/15 flex items-center justify-center text-primary flex-shrink-0">
+              <Bot className="h-7 w-7" />
+            </div>
+            <div className="flex-1 space-y-4">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-bold mb-2">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  مدعوم بالذكاء الاصطناعي
+                </div>
+                <h2 className="font-heading text-2xl md:text-3xl font-bold">
+                  الدعم الفني الذكي — متاح 24/7
+                </h2>
+                <p className="text-muted-foreground mt-2 text-sm md:text-base leading-relaxed">
+                  وكيلنا الذكي يجيب على استفساراتك خلال ثوانٍ، يقترح المنتجات المناسبة، يتابع طلبك،
+                  ويشرح سياسات الشحن والإرجاع. وعند الحاجة يحوّلك مباشرة لفريق الدعم البشري على واتساب.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="flex items-start gap-3 p-3 rounded-xl bg-background/60 border border-border">
+                  <Zap className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="text-sm font-bold">رد فوري</div>
+                    <div className="text-xs text-muted-foreground">أقل من 5 ثوانٍ</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-3 rounded-xl bg-background/60 border border-border">
+                  <ShieldCheck className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="text-sm font-bold">معلومات دقيقة</div>
+                    <div className="text-xs text-muted-foreground">من كتالوج المتجر مباشرة</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-3 rounded-xl bg-background/60 border border-border">
+                  <MessageCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="text-sm font-bold">تحويل بشري</div>
+                    <div className="text-xs text-muted-foreground">واتساب عند الحاجة</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <p className="text-xs text-muted-foreground mb-2">جرّب أن تسأل:</p>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    'اقترح لي خوذة بسعر مناسب',
+                    'ما هي سياسة الإرجاع؟',
+                    'أين طلبي رقم #1234؟',
+                    'كم تستغرق مدة الشحن؟',
+                  ].map((q) => (
+                    <span
+                      key={q}
+                      className="text-xs px-3 py-1.5 rounded-full bg-secondary text-secondary-foreground border border-border"
+                    >
+                      {q}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-xs text-muted-foreground mt-4">
+                  💡 افتح المساعد من الزر الدائري أسفل يسار الشاشة في أي وقت.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Google Maps */}
